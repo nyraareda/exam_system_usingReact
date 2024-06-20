@@ -31,7 +31,6 @@ const UserResults = ({ userId }) => {
                 <p>Score: {result.score}</p>
                 <p>Date: {new Date(result.createdAt).toLocaleString()}</p>
               </div>
-              <a href="#" className="card-button">View Details</a>
             </div>
           </div>
         ))}

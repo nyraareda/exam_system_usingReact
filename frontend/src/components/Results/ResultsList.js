@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchAllResults } from '../../api';
 import './ResultsList.css'; // Import the CSS file
-
+import Sidebar from '../Dashboard/Sidebar'
 const AdminViewAllResults = () => {
   const [results, setResults] = useState([]);
 
@@ -20,6 +20,7 @@ const AdminViewAllResults = () => {
   }, []);
 
   return (
+    <>
     <div className="exam-details">
       <h2 className="title">All Students' Results</h2>
       <div className="card-container">
@@ -32,12 +33,12 @@ const AdminViewAllResults = () => {
                 <p>Score: {result.score}</p>
                 <p>Date: {new Date(result.createdAt).toLocaleString()}</p>
               </div>
-              <a href="#" className="card-button">View Details</a>
             </div>
           </div>
         ))}
       </div>
     </div>
+    </>
   );
 };
 
