@@ -162,14 +162,18 @@ export const fetchExamDetails = async (examId) => {
   }
 };
 
-export const submitExam = async (examId, userId, answers) => {
+export const submitExam = async (examId, userId, answers, score) => {
   try {
     const token = getToken();
-    const response = await axios.post(`${API_URL}/student/exams/${examId}/take`, { user: userId, answers }, {
-      headers: {
-        'Authorization': `Bearer ${token}`
+    const response = await axios.post(`${API_URL}/student/exams/${examId}/take`, 
+      { user: userId, answers, score }, 
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
       }
-    });
+    );
     return response.data;
   } catch (error) {
     throw error;

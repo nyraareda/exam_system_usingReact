@@ -159,6 +159,4 @@ router.post("/:examId/questions/:questionId", examController.addQuestionToExam);
 // Get exam details
 router.get('/exams/:id', authMiddleware, examController.getExamDetails);
 
-// Submit exam answers
-router.post('/student/exams/:examId/take', authMiddleware, examController.submitExam);
 module.exports = router;

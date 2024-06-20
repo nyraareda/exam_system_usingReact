@@ -33,17 +33,28 @@ const TakeExamForm = ({ userId }) => {
     setAnswers(updatedAnswers);
   };
 
+  const calculateScore = () => {
+    let score = 0;
+    exam.questions.forEach((question, index) => {
+      if (question.correctOption === answers[index]) {
+        score += 1;
+      }
+    });
+    return score;
+  };
+
+  const saveScoreToLocal = (score) => {
+    localStorage.setItem('latestExamScore', JSON.stringify({ score, examId }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await submitExam(examId, userId, answers);
-      setSuccess('Exam submitted successfully!');
-      setError('');
-    } catch (error) {
-      setError('Failed to submit exam. Please try again later.');
-      setSuccess('');
-    }
+    const score = calculateScore();
+    saveScoreToLocal(score); // Save score to local storage
+    setSuccess(`Exam submitted successfully! Your score is ${score}.`);
   };
+
+  
 
   if (!exam) {
     return <div>Loading...</div>;

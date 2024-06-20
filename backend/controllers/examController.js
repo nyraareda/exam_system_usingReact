@@ -95,24 +95,4 @@ exports.getExamDetails = async (req, res) => {
   }
 };
 
-exports.submitExam = async (req, res) => {
-  try {
-    const { examId } = req.params;
-    const { user, answers } = req.body;
-    // Logic to calculate the score based on answers
-    const exam = await Exam.findById(examId).populate("questions");
-    let score = 0;
-    if (exam) {
-      exam.questions.forEach((question, index) => {
-        if (question.correctOption === answers[index]) {
-          score += 1;
-        }
-      });
-    }
-    const newResult = new Result({ user, exam: examId, score });
-    await newResult.save();
-    res.status(201).json(newResult);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
+
