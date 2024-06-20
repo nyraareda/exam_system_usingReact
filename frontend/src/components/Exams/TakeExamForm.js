@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { fetchExams, takeExam } from '../../api';
+// import './TakeExamForm.css';
 
-
-const TakeExamForm = ({ examId, userId }) => {
+const TakeExamForm = ({ userId }) => {
+  const { examId } = useParams();
   const [exam, setExam] = useState(null);
   const [answers, setAnswers] = useState([]);
   const [error, setError] = useState('');

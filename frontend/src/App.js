@@ -12,6 +12,7 @@ import StudentDashboard from './components/Dashboard/student/StudentDashboard';
 import TeacherDashboard from './components/Dashboard/teacher/TeacherDashboard';
 import ExamForm from "./components/Exams/ExamForm";
 import TakeExamForm from "./components/Exams/TakeExamForm";
+
 const App = () => {
   const [loggedIn, setLoggedIn] = React.useState(false);
 
@@ -33,8 +34,7 @@ const App = () => {
       <Route path="/student-dashboard" element={<StudentDashboard />} />
       <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
       <Route path="/create-exam" element={<ExamForm />} />
-      <Route path="/take-exam" element={<TakeExamForm />} />
-
+      <Route path="/take-exam/:examId" element={<TakeExamForm />} />
     </Routes>
   );
 };

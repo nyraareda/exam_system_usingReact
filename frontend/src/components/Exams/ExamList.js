@@ -1,5 +1,5 @@
-// src/components/Exams/ExamList.js
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchExams } from '../../api'; // Adjust the import path as necessary
 import './ExamList.css';
 
@@ -40,7 +40,9 @@ const ExamList = () => {
             <li key={exam._id} className="exam-item">
               <h3>{exam.name}</h3>
               <p>Total Questions: {exam.questions.length}</p>
-              {/* Add other exam details or actions */}
+              <Link to={`/take-exam/${exam._id}`}>
+                <button className="take-exam-button">Take Exam</button>
+              </Link>
             </li>
           ))}
         </ul>

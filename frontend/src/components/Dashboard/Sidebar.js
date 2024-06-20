@@ -9,7 +9,6 @@ const Sidebar = ({ userType }) => {
       ? [
           { label: 'Results', path: '/results' },
           { label: 'Exams', path: '/exams' },
-          { label: 'Take Exams', path: '/take-exam' },
         ]
       : [
           { label: 'Students', path: '/students' },
