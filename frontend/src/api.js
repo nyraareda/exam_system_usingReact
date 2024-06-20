@@ -143,3 +143,35 @@ export const fetchResults = async (userId) => {
         throw error;
     }
 };
+
+const getToken = () => {
+  return localStorage.getItem('token');
+};
+
+export const fetchExamDetails = async (examId) => {
+  try {
+    const token = getToken();
+    const response = await axios.get(`${API_URL}/exams/${examId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const submitExam = async (examId, userId, answers) => {
+  try {
+    const token = getToken();
+    const response = await axios.post(`${API_URL}/student/exams/${examId}/take`, { user: userId, answers }, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

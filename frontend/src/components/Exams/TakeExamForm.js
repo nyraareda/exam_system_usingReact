@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchExams, takeExam } from '../../api';
-// import './TakeExamForm.css';
+import { fetchExamDetails, submitExam } from '../../api';
 
 const TakeExamForm = ({ userId }) => {
   const { examId } = useParams();
@@ -13,7 +12,7 @@ const TakeExamForm = ({ userId }) => {
   useEffect(() => {
     const loadExam = async () => {
       try {
-        const examData = await fetchExams(examId);
+        const examData = await fetchExamDetails(examId);
         if (examData && examData.questions) {
           setExam(examData);
           setAnswers(Array(examData.questions.length).fill(''));
@@ -37,7 +36,7 @@ const TakeExamForm = ({ userId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await takeExam(examId, userId, answers);
+      await submitExam(examId, userId, answers);
       setSuccess('Exam submitted successfully!');
       setError('');
     } catch (error) {
