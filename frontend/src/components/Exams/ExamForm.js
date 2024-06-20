@@ -1,6 +1,5 @@
-// ExamForm.js
 import React, { useState } from 'react';
-import { createExam } from '../../api';
+import { createExam, createQuestion } from '../../api';
 import './ExamForm.css';
 import QuestionForm from './QuestionForm';
 
@@ -29,13 +28,21 @@ const ExamForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Create questions first and get their IDs
+      const createdQuestions = await Promise.all(
+        questions.map(async (question) => {
+          const createdQuestion = await createQuestion({
+            question: question.question,
+            options: question.options.filter((option) => option.trim() !== ''),
+            correctOption: question.correctOption,
+          });
+          return createdQuestion._id;
+        })
+      );
+
       const examData = {
         name: examName,
-        questions: questions.map((question) => ({
-          question: question.question,
-          options: question.options.filter((option) => option.trim() !== ''),
-          correctOption: question.correctOption,
-        })),
+        questions: createdQuestions, 
       };
 
       await createExam(examData);

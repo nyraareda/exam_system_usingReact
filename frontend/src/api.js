@@ -74,9 +74,12 @@ export const createExam = async (examData) => {
 
 export const createQuestion = async (questionData) => {
   try {
-    console.log('Request Data:', questionData); // Log request data before sending
-
-    const response = await axios.post(`${API_URL}/questions`, questionData);
+    const token = localStorage.getItem('token'); // Retrieve token from local storage or any other storage
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+    
+    const response = await axios.post(`${API_URL}/questions`, questionData, config);
 
     console.log('Response Data:', response.data); // Log response data upon successful response
 
