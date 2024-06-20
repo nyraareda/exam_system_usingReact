@@ -162,20 +162,29 @@ export const fetchExamDetails = async (examId) => {
   }
 };
 
-export const submitExam = async (examId, userId, answers, score) => {
+export const submitResult = async ({ user, exam, score }) => {
   try {
-    const token = getToken();
-    const response = await axios.post(`${API_URL}/student/exams/${examId}/take`, 
-      { user: userId, answers, score }, 
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token is missing');
+    }
+
+    const response = await axios.post(
+      `${API_URL}/results/submit`, 
+      { user, exam, score },
       {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       }
     );
+    
     return response.data;
   } catch (error) {
+    console.error('Error submitting results:', error.response || error);
     throw error;
   }
 };
+
+

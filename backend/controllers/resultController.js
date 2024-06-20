@@ -1,9 +1,9 @@
-const result = require("../models/result");
+const Result = require("../models/result");
 
 exports.submitResult = async (req, res) => {
   try {
     const { user, exam, score } = req.body;
-    const newResult = new result({ user, exam, score });
+    const newResult = new Result({ user, exam, score });
     await newResult.save();
     res.status(201).json(newResult);
   } catch (error) {
@@ -13,8 +13,7 @@ exports.submitResult = async (req, res) => {
 
 exports.getResults = async (req, res) => {
   try {
-    // strict mode: false
-    const results = await result
+    const results = await Result
       .find()
       .populate({
         path: "exam",
@@ -22,7 +21,6 @@ exports.getResults = async (req, res) => {
           path: "questions",
         },
       })
-      // exclude password when populating
       .populate({
         path: "user",
         select: "-password",
@@ -36,7 +34,7 @@ exports.getResults = async (req, res) => {
 exports.getResult = async (req, res) => {
   try {
     const { id } = req.params;
-    const result = await result
+    const result = await Result
       .findById(id)
       .populate({
         path: "exam",
@@ -44,7 +42,6 @@ exports.getResult = async (req, res) => {
           path: "questions",
         },
       })
-      // exclude password when populating
       .populate({
         path: "user",
         select: "-password",
@@ -58,7 +55,7 @@ exports.getResult = async (req, res) => {
 exports.getUserResults = async (req, res) => {
   try {
     const { user } = req.params;
-    const results = await result
+    const results = await Result
       .find({ user })
       .populate({
         path: "exam",
@@ -66,7 +63,6 @@ exports.getUserResults = async (req, res) => {
           path: "questions",
         },
       })
-      // exclude password when populating
       .populate({
         path: "user",
         select: "-password",
@@ -80,7 +76,7 @@ exports.getUserResults = async (req, res) => {
 exports.deleteResult = async (req, res) => {
   try {
     const { id } = req.params;
-    await result.findByIdAndDelete(id);
+    await Result.findByIdAndDelete(id);
     res.status(200).json({ message: "Result deleted successfully" });
   } catch (error) {
     res.status(400).json({ error: error.message });

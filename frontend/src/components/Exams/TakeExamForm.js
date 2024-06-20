@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchExamDetails, submitExam } from '../../api';
+import { fetchExamDetails, submitResult } from '../../api';
 
 const TakeExamForm = ({ userId }) => {
   const { examId } = useParams();
@@ -8,6 +8,7 @@ const TakeExamForm = ({ userId }) => {
   const [answers, setAnswers] = useState([]);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const loadExam = async () => {
@@ -43,18 +44,25 @@ const TakeExamForm = ({ userId }) => {
     return score;
   };
 
-  const saveScoreToLocal = (score) => {
-    localStorage.setItem('latestExamScore', JSON.stringify({ score, examId }));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const score = calculateScore();
-    saveScoreToLocal(score); // Save score to local storage
-    setSuccess(`Exam submitted successfully! Your score is ${score}.`);
+    try {
+      await submitResult({
+        user: userId,
+        exam: examId,
+        score
+      });
+      setSuccess(`Exam submitted successfully! Your score is ${score}.`);
+      setError('');
+    } catch (error) {
+      setError('Failed to submit exam results. Please try again.');
+      console.error('Error submitting exam results:', error);
+    } finally {
+      setLoading(false);
+    }
   };
-
-  
 
   if (!exam) {
     return <div>Loading...</div>;
@@ -87,7 +95,9 @@ const TakeExamForm = ({ userId }) => {
             </ul>
           </div>
         ))}
-        <button type="submit" className="submit-btn">Submit Exam</button>
+        <button type="submit" className="submit-btn" disabled={loading}>
+          {loading ? 'Submitting...' : 'Submit Exam'}
+        </button>
       </form>
     </div>
   );
