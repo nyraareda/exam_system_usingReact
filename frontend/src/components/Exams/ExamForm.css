@@ -46,34 +46,29 @@
     font-size: 16px;
   }
   
-  button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
+  .button{
+    background-color: var(--bg-color);
+    border: 2px solid var(--bg-color);
+    padding: 12px 18px;
     border-radius: 4px;
+    color: #fff;
+    text-shadow: 0 0 2px rgba(0,0,0, .1);
     font-size: 16px;
+    outline: none;
+    transition: .5s ease;
     cursor: pointer;
-    margin-top: 10px;
+    user-select: none;
   }
   
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  button[type="button"] {
-    margin-right: 10px;
-    background-color: #2ccb93;
-  }
-  
-  button[type="button"]:hover {
-    background-color: #1e9a6f;
+  .button:hover {
+    background-color: #fff;
+    color: #333;
   }
   
   .add-remove-btn {
     margin-top: 10px;
     font-size: 14px;
-    color: #007bff;
+    color: var(--bg-color);
     background: none;
     border: none;
     cursor: pointer;
@@ -81,6 +76,23 @@
   }
   
   .add-remove-btn:hover {
-    color: #0056b3;
+    color: var(--bg-color);
   }
-  
+  .ButtonPrimary {
+    background-color: var(--bg-color);
+    border: 2px solid var(--bg-color);
+    padding: 12px 18px;
+    border-radius: 4px;
+    color: #fff;
+    text-shadow: 0 0 2px rgba(0,0,0, .1);
+    font-size: 16px;
+    outline: none;
+    transition: .5s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+.ButtonPrimary:hover {
+    background-color: #fff;
+    color: #333;
+}

@@ -1,0 +1,120 @@
+
+.hero {
+  display: inline-block;
+  position: relative;
+  width: 400px;
+  min-width: 400px;
+  height: 400px;
+  border-radius: 30px;
+  overflow:hidden;
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
+  margin: 30px;
+}
+.hero-description-bk {
+  background-image: linear-gradient(0deg , #3f5efb, var(--bg-color));
+  border-radius: 30px;
+  position: absolute;
+  top: 55%;
+  left: -5px;
+  height: 65%;
+  width: 108%;
+  transform: skew(19deg, -9deg);
+}
+
+.second .hero-description-bk {
+  background-image: linear-gradient(-20deg , #bb7413, #e7d25c)
+}
+
+.hero-description {
+  position: absolute;
+  color: #fff;
+  font-weight: 900;
+  left: 100px;
+  bottom: 26%;
+  font-size: 20px;
+}
+
+.hero-btn {
+  position: absolute;
+  color: #fff;
+  right: 30px;
+  bottom: 10%;
+  padding: 10px 20px;
+  border: 1px solid #fff;
+}
+
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  background-color: #eee;
+  min-height: 100vh;
+}
+
+.take-exam-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.question-item {
+  margin-bottom: 20px;
+}
+.option-list {
+    margin-top: 35px;
+  list-style-type: none;
+  padding: 0;
+  margin-left:20px ;
+}
+.option-list li{
+    font-size: 18px;
+}
+.option-item {
+  margin-bottom: 10px;
+}
+
+.submit-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 15px 25px;
+  border: none;
+  background-color: #3f5efb;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.submit-btn:hover{
+    background-color: #324bc9;
+}
+.submit-btn:disabled {
+  background-color: #ccc;
+}
+.success {
+    color: #4caf50;
+    background-color: #e8f5e9;
+    border: 1px solid #4caf50;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    text-align: center;
+    width: 300px;
+    height: 50px;
+  }
+  .Error{
+    color: red;
+    background-color: #f5e8ec;
+    border: 1px solid red;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    text-align: center;
+    width: 300px;
+    height: 50px;
+  }

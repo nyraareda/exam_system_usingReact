@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchExamDetails, submitResult } from '../../api';
+import "./TakeExamForm.css";
 
 const TakeExamForm = ({ userId }) => {
   const { examId } = useParams();
@@ -54,8 +55,13 @@ const TakeExamForm = ({ userId }) => {
         exam: examId,
         score
       });
-      setSuccess(`Exam submitted successfully! Your score is ${score}.`);
-      setError('');
+      if (score === 0) {
+        setError(`Not good degree. Your score is ${score}.`);
+        setSuccess('');
+      } else {
+        setSuccess(`Exam submitted successfully! Your score is ${score}.`);
+        setError('');
+      }
     } catch (error) {
       setError('Failed to submit exam results. Please try again.');
       console.error('Error submitting exam results:', error);
@@ -71,12 +77,15 @@ const TakeExamForm = ({ userId }) => {
   return (
     <div className="take-exam-form">
       <h2 className="title">{exam.name}</h2>
-      {error && <p className="error">{error}</p>}
+      {error && <p className={`error ${error.includes('Not good degree') ? 'Error' : ''}`}>{error}</p>}
       {success && <p className="success">{success}</p>}
       <form onSubmit={handleSubmit}>
         {exam.questions && exam.questions.map((question, index) => (
-          <div key={question._id} className="question-item">
-            <p>{question.question}</p>
+          <div key={question._id} className="hero">
+            <div className="hero-description-bk"></div>
+            <div className="hero-description">
+              <p>{question.question}</p>
+            </div>
             <ul className="option-list">
               {question.options.map((option, optionIndex) => (
                 <li key={optionIndex} className="option-item">

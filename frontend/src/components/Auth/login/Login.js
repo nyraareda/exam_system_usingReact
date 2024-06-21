@@ -32,9 +32,9 @@ const Login = () => {
       console.log('Login successful', data);
 
       if (data && data.role) {
-        // Save role to localStorage
+        console.log(data)
         localStorage.setItem('userRole', data.role);
-
+        localStorage.setItem('id', data.userId);
         if (data.role === 'user') {
           navigate('/student-dashboard'); 
         } else if (data.role === 'admin') {

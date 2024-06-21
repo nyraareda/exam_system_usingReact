@@ -53,9 +53,6 @@ export const takeExam = async (examId, userId, answers) => {
     }
 };
 
-// api.js
-
-
 
 export const createExam = async (examData) => {
   try {
@@ -70,7 +67,6 @@ export const createExam = async (examData) => {
     throw error;
   }
 };
-
 
 export const createQuestion = async (questionData) => {
   try {
@@ -90,58 +86,31 @@ export const createQuestion = async (questionData) => {
   }
 };
 
-export const updateExam = async (examId, examData) => {
-    try {
-        const response = await axios.put(`${API_URL}/exams/${examId}`, examData);
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
+export const updateExam = async (examId, examData, token) => {
+  try {
+    const response = await axios.put(`${API_URL}/exams/${examId}`, examData, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const deleteExam = async (examId) => {
-    try {
-        const response = await axios.delete(`${API_URL}/exams/${examId}`);
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
-};
-
-export const fetchQuestions = async () => {
-    try {
-        const response = await axios.get(`${API_URL}/questions`);
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
-};
-
-export const updateQuestion = async (questionId, questionData) => {
-    try {
-        const response = await axios.put(`${API_URL}/questions/${questionId}`, questionData);
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
-};
-
-export const deleteQuestion = async (questionId) => {
-    try {
-        const response = await axios.delete(`${API_URL}/questions/${questionId}`);
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
-};
-
-export const fetchResults = async (userId) => {
-    try {
-        const response = await axios.get(`${API_URL}/student/results?user=${userId}`);
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
+  try {
+    const token = getToken();
+    const response = await axios.delete(`${API_URL}/exams/${examId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const getToken = () => {
@@ -186,9 +155,6 @@ export const submitResult = async ({ user, exam, score }) => {
     throw error;
   }
 };
-
-
-
 export const fetchAllResults = async () => {
   try {
     const token = getToken();
@@ -218,6 +184,48 @@ export const fetchUserResults = async (userId) => {
       headers: {
         'Authorization': `Bearer ${token}`
       }
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchQuestions = async () => {
+  try {
+    const token = getToken();
+    const response = await axios.get(`${API_URL}/questions`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateQuestion = async (questionId, questionData) => {
+  try {
+    const token = getToken();
+    const response = await axios.put(`${API_URL}/questions/${questionId}`, questionData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteQuestion = async (questionId) => {
+  try {
+    const token = getToken();
+    const response = await axios.delete(`${API_URL}/questions/${questionId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
     return response.data;
   } catch (error) {

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { fetchUserResults } from '../../api';
-import './ResultsList.css'; // Import the CSS file
+import './Results.css'; // Import the CSS file
 
-const UserResults = ({ userId }) => {
+const UserResults = () => {
   const [results, setResults] = useState([]);
-
+  const userId = localStorage.getItem('id');
+console.log(userId)
   useEffect(() => {
     const fetchResults = async () => {
       try {
@@ -12,10 +13,9 @@ const UserResults = ({ userId }) => {
         setResults(resultsData);
       } catch (error) {
         console.error('Error fetching results:', error);
-        // Handle error (e.g., show error message)
       }
     };
-
+    console.log(userId);
     fetchResults();
   }, [userId]);
 

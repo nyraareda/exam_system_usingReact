@@ -3,14 +3,17 @@ import { Link } from 'react-router-dom';
 import './Sidebar.css'; // Import the CSS file
 
 const Sidebar = ({ userType }) => {
-  const sidebarItems = 
+  const sidebarItems =
     userType === 'student' ? [
-      { label: 'Results', path: '/user-result' },
       { label: 'Exams', path: '/exams' }
     ] : userType === 'teacher' ? [
       { label: 'Students', path: '/admin-result' },
-      { label: 'Create Exam', path: '/create-exam' }
-    ] : [];
+      { label: 'Create Exam', path: '/create-exam' },
+      { label: 'All Questions', path: '/questions' },
+      { label: 'Exams', path: '/exams' } 
+    ] : [
+      { label: 'Exams', path: '/exams' } 
+    ];
 
   return (
     <div className="sidebar">

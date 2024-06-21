@@ -12,7 +12,7 @@ const Nav = () => {
     navigate('/login');
   };
 
-  const loggedIn = localStorage.getItem('userRole');
+  const userRole = localStorage.getItem('userRole');
 
   const navStyle = {
     backgroundImage: `url(${BGNav})`,
@@ -21,21 +21,34 @@ const Nav = () => {
     backgroundPosition: 'bottom'
   };
 
+  const getDashboardLink = () => {
+    if (userRole === 'user') {
+      return '/student-dashboard';
+    } else if (userRole === 'admin') {
+      return '/teacher-dashboard';
+    }
+    return '/';
+  };
+
   return (
     <AppBar position="static" style={{ marginBottom: '16px' }}>
       <Toolbar style={navStyle}>
         <Typography variant="h6" style={{ flexGrow: 1 }}>
-        <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
-          <div className="brand">
-            <strong variant="h6" style={{ flexGrow: 1 }}>Exam system</strong>
-            
-          </div>
-        </Link>
+          <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <div className="brand">
+              <strong variant="h6" style={{ flexGrow: 1 }}>Exam System</strong>
+            </div>
+          </Link>
         </Typography>
-        {loggedIn ? (
-          <Button color="inherit" onClick={handleLogout}>
-            Logout
-          </Button>
+        {userRole ? (
+          <>
+            <Button component={Link} to={getDashboardLink()} color="inherit">
+              Your Dashboard
+            </Button>
+            <Button color="inherit" onClick={handleLogout}>
+              Logout
+            </Button>
+          </>
         ) : (
           <>
             <Button component={Link} to="/login" color="inherit">

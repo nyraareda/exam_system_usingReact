@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchAllResults } from '../../api';
-import './ResultsList.css'; // Import the CSS file
+import './Results.css'; // Import the CSS file
 import Sidebar from '../Dashboard/Sidebar'
 const AdminViewAllResults = () => {
   const [results, setResults] = useState([]);
@@ -12,7 +12,6 @@ const AdminViewAllResults = () => {
         setResults(resultsData);
       } catch (error) {
         console.error('Error fetching results:', error);
-        // Handle error (e.g., show error message)
       }
     };
 
@@ -27,7 +26,7 @@ const AdminViewAllResults = () => {
         {results.map((result) => (
           <div key={result._id} className="card">
             <div className="card-body">
-              <h3 className="card-title">Student: {result.user?.name || 'Unknown'}</h3>
+              <h3 className="card-title">Student: {result.user?.email || 'Unknown'}</h3>
               <div className="card-text">
                 <p>Exam: {result.exam?.name || 'Unknown'}</p>
                 <p>Score: {result.score}</p>

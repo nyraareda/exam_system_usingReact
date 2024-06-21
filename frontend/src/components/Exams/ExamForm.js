@@ -82,7 +82,7 @@ const ExamForm = () => {
           </div>
         ))}
 
-        <button type="button" onClick={handleQuestionAdd}>
+        <button type="button" onClick={handleQuestionAdd} className='ButtonPrimary'>
           Add Question
         </button>
 

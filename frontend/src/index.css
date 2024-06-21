@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import url('https://use.fontawesome.com/releases/v5.8.1/css/all.css');
 :root {
   /* --bg-color: #FFDD23; */
   --bg-color: #fec235;
@@ -6,7 +8,6 @@
 html {
   scroll-behavior: smooth;
 }
-
 body {
   margin: 0;
   padding: 0;
