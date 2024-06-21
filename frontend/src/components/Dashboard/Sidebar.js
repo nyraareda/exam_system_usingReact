@@ -5,7 +5,9 @@ import './Sidebar.css'; // Import the CSS file
 const Sidebar = ({ userType }) => {
   const sidebarItems =
     userType === 'student' ? [
-      { label: 'Exams', path: '/exams' }
+      { label: 'Exams', path: '/exams' },
+      { label: 'Results', path: '/user-result' }
+
     ] : userType === 'teacher' ? [
       { label: 'Students', path: '/admin-result' },
       { label: 'Create Exam', path: '/create-exam' },

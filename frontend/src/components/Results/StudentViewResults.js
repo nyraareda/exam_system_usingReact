@@ -4,18 +4,22 @@ import './Results.css'; // Import the CSS file
 
 const UserResults = () => {
   const [results, setResults] = useState([]);
-  const userId = localStorage.getItem('id');
-console.log(userId)
+  const userId = localStorage.getItem('userId'); // Ensure this matches the key used in local storage
+
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const resultsData = await fetchUserResults(userId);
-        setResults(resultsData);
+        if (userId) {
+          const resultsData = await fetchUserResults(userId);
+          setResults(resultsData);
+        } else {
+          console.error('No user ID found in local storage');
+        }
       } catch (error) {
         console.error('Error fetching results:', error);
       }
     };
-    console.log(userId);
+
     fetchResults();
   }, [userId]);
 

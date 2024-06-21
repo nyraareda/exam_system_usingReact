@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { fetchExamDetails, submitResult } from '../../api';
 import "./TakeExamForm.css";
 
-const TakeExamForm = ({ userId }) => {
+const TakeExamForm = () => {
   const { examId } = useParams();
   const [exam, setExam] = useState(null);
   const [answers, setAnswers] = useState([]);
@@ -49,6 +49,7 @@ const TakeExamForm = ({ userId }) => {
     e.preventDefault();
     setLoading(true);
     const score = calculateScore();
+    const userId = localStorage.getItem('userId'); // Retrieve userId from local storage
     try {
       await submitResult({
         user: userId,

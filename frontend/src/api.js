@@ -2,20 +2,26 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:8080';
 
+
 export const login = async (email, password) => {
-    try {
-      const response = await axios.post(`${API_URL}/login`, { email, password });
-      const token = response.data.token;
-      localStorage.setItem('token', token);
-      return response.data;
-    } catch (error) {
-      if (error.response && error.response.data) {
-        throw error.response.data;
-      } else {
-        throw error;
-      }
+  try {
+    const response = await axios.post(`${API_URL}/login`, { email, password });
+    const { token, userEmail, userId, userName } = response.data;
+
+    localStorage.setItem('token', token);
+    localStorage.setItem('userEmail', userEmail);
+    localStorage.setItem('userId', userId);
+    localStorage.setItem('userName', userName);
+
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.data) {
+      throw error.response.data;
+    } else {
+      throw error;
     }
-  };
+  }
+};
   
 
 export const register = async (name, email, password) => {
@@ -173,6 +179,7 @@ export const fetchAllResults = async () => {
   }
 };
 
+
 export const fetchUserResults = async (userId) => {
   try {
     const token = getToken();
@@ -190,7 +197,6 @@ export const fetchUserResults = async (userId) => {
     throw error;
   }
 };
-
 export const fetchQuestions = async () => {
   try {
     const token = getToken();

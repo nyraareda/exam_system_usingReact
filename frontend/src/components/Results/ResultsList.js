@@ -26,7 +26,7 @@ const AdminViewAllResults = () => {
         {results.map((result) => (
           <div key={result._id} className="card">
             <div className="card-body">
-              <h3 className="card-title">Student: {result.user?.email || 'Unknown'}</h3>
+              <h3 className="card-title">Student: {result.user?.name}</h3>
               <div className="card-text">
                 <p>Exam: {result.exam?.name || 'Unknown'}</p>
                 <p>Score: {result.score}</p>
